@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sent Messages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .message-date {
+            font-size: 0.9em;
+            color: #888;
+        }
+        .message-content {
+            margin-top: 5px;
+        }
+        .message-content strong {
+            color: #333;
+        }
+        .message-edited {
+            color: #555;
+        }
+        .nav-buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .nav-buttons a {
+            text-decoration: none;
+            color: #007bff;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .nav-buttons a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-buttons">
+            <a href="{% url 'index' %}">Back to Main</a>
+            <a href="{% url 'send' %}">Send Message</a>
+            <a href="{% url 'log_out' %}">Log out</a>
+        </div>
+        <h1>Sent Messages</h1>
+        <ul>
+            {% for message in messages %}
+                <li>
+                    <div class="message-date">{{ message.send_date }}</div>
+                    <div class="message-content">
+                        <strong>Original:</strong> {{ message.original_text }}
+                    </div>
+                    <div class="message-content">
+                        <strong>Edited:</strong> <span class="message-edited">{{ message.edited_text }}</span>
+                    </div>
+                </li>
+            {% empty %}
+                <li>No messages found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
